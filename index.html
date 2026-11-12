@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huỳnh Thiện Nhân | My Little World</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --dark: #382315;
+  --brown: #67452c;
+  --gold: #bd9654;
+  --gold-light: #e4c98e;
+  --cream: #f5ead3;
+  --paper: #ead8b5;
+  --ink: #49321f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at center, rgba(179,132,72,.15), transparent 65%),
+    linear-gradient(135deg, #21150e, #4a3020 50%, #24170f);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+  z-index: 20;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px 20px;
+}
+
+.top-label {
+  color: var(--gold-light);
+  letter-spacing: 5px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.presentation {
+  width: min(920px, 100%);
+  min-height: 570px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(255,255,255,.4), transparent 70%),
+    linear-gradient(135deg, #f8efd9, #e9d4ae 55%, #f4e6c8);
+  border: 1px solid #c39c5d;
+  box-shadow:
+    0 0 0 7px rgba(190,151,87,.12),
+    0 0 0 9px rgba(211,177,116,.35),
+    0 24px 65px rgba(0,0,0,.45);
+  overflow: hidden;
+}
+
+.presentation::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(139,94,42,.5);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.presentation::after {
+  content: "✦";
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b28b4e;
+  font-size: 22px;
+  z-index: 3;
+}
+
+.slide {
+  display: none;
+  min-height: 570px;
+  padding: 70px 65px 65px;
+  position: relative;
+  animation: appear .65s ease;
+}
+
+.slide.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.corner {
+  position: absolute;
+  color: #b28b4e;
+  font-size: 35px;
+  opacity: .75;
+}
+
+.corner.tl { top: 18px; left: 22px; }
+.corner.tr { top: 18px; right: 22px; }
+.corner.bl { bottom: 18px; left: 22px; }
+.corner.br { bottom: 18px; right: 22px; }
+
+.eyebrow {
+  text-align: center;
+  color: #9b7440;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+.main-title {
+  text-align: center;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.15;
+  color: #54351f;
+}
+
+.script {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(34px, 5vw, 55px);
+  color: #a47a40;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.description {
+  font-size: 21px;
+  line-height: 1.7;
+  text-align: center;
+  color: #70543a;
+  max-width: 610px;
+  margin: 20px auto;
+}
+
+.gold-line {
+  width: 100px;
+  height: 1px;
+  background: #b28b4e;
+  margin: 22px auto;
+  position: relative;
+}
+
+.gold-line::after {
+  content: "✧";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #f1e3c5;
+  padding: 0 8px;
+  color: #a77d40;
+}
+
+.hero-seal {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  margin: 28px auto 10px;
+  display: grid;
+  place-items: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 53px;
+  color: #f4e4bf;
+  background: radial-gradient(circle at 35% 30%, #b58b4c, #684323 75%);
+  border: 4px double #e5c98e;
+  box-shadow: 0 5px 18px #8e673c66;
+}
+
+.small-note {
+  text-align: center;
+  font-size: 16px;
+  color: #94764f;
+  letter-spacing: 2px;
+  margin-top: 18px;
+}
+
+/* PROFILE */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 650px;
+  width: 100%;
+  margin: 25px auto;
+}
+
+.info-card {
+  background: rgba(255,250,235,.55);
+  border: 1px solid #c9aa76;
+  padding: 22px 18px;
+  text-align: center;
+  box-shadow: 0 5px 14px #79562a15;
+  transition: .3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,.7);
+}
+
+.info-card .symbol {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.info-card .label {
+  color: #9a7545;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.info-card .value {
+  font-size: 23px;
+  margin-top: 5px;
+  color: #51361f;
+  overflow-wrap: anywhere;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: #704b2c;
+  text-decoration: none;
+  border-bottom: 1px solid #bd9654;
+  padding: 5px 8px;
+  font-size: 17px;
+}
+
+.social-links a:hover {
+  color: #a57939;
+}
+
+/* HOBBIES */
+
+.music-stage {
+  max-width: 700px;
+  width: 100%;
+  margin: 15px auto;
+  padding: 30px 20px;
+  border: 1px solid #c9a66f;
+  background: rgba(255,250,235,.42);
+  position: relative;
+  text-align: center;
+}
+
+.music-icon {
+  font-size: 85px;
+  display: inline-block;
+  animation: musicFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 5px #8b623b44);
+}
+
+@keyframes musicFloat {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+.sticker {
+  position: absolute;
+  font-size: 30px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-12px) rotate(8deg); }
+}
+
+.s1 { top: 15px; left: 25px; }
+.s2 { top: 25px; right: 25px; animation-delay: .5s; }
+.s3 { bottom: 20px; left: 40px; animation-delay: 1s; }
+.s4 { bottom: 20px; right: 40px; animation-delay: 1.5s; }
+
+.hobby-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hobby-tags span {
+  padding: 8px 17px;
+  border: 1px solid #b9955f;
+  border-radius: 30px;
+  color: #745332;
+  font-size: 17px;
+  background: #f7ecd4;
+}
+
+/* LETTER */
+
+.letter-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+}
+
+.envelope {
+  width: 260px;
+  height: 175px;
+  background: #b88b50;
+  position: relative;
+  margin: 30px auto;
+  cursor: pointer;
+  box-shadow: 0 12px 24px #6e482e44;
+  transition: .5s;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #d7b77d;
+  clip-path: polygon(0 0, 100% 0, 50% 65%);
+  transform-origin: top;
+  transition: transform .8s;
+  z-index: 3;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #c49a61;
+  clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+  z-index: 2;
+}
+
+.envelope .seal {
+  position: absolute;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 4;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #853e2d;
+  border: 2px solid #e3c78d;
+  color: #f4dba8;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  transition: .3s;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.letter-paper {
+  position: absolute;
+  width: 88%;
+  height: 150px;
+  left: 6%;
+  top: 10px;
+  background: #fff4d9;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 17px;
+  transition: .8s;
+}
+
+.envelope.open .letter-paper {
+  transform: translateY(-120px);
+  z-index: 5;
+  height: 200px;
+  box-shadow: 0 0 15px #5e402d22;
+}
+
+.letter-instruction {
+  font-size: 17px;
+  color: #98784d;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.letter-message {
+  max-width: 600px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.6;
+  color: #68462b;
+  display: none;
+  margin: 10px auto;
+}
+
+.letter-message.show {
+  display: block;
+  animation: appear .7s ease;
+}
+
+/* QUIZ */
+
+.quiz-wrap {
+  max-width: 650px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.quiz-question {
+  padding: 19px;
+  background: rgba(255,250,235,.58);
+  border: 1px solid #c8a66e;
+  margin-bottom: 17px;
+}
+
+.question-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  color: #55391f;
+  margin-bottom: 13px;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.answer {
+  padding: 10px;
+  border: 1px solid #c8aa78;
+  background: #f8efd9;
+  color: #694b2c;
+  font-size: 17px;
+  text-align: center;
+  transition: .2s;
+}
+
+.answer:hover {
+  background: #e9d4ae;
+}
+
+.answer.selected {
+  background: #79542f;
+  color: #fff0d1;
+  border-color: #79542f;
+}
+
+.answer.correct {
+  background: #65764b;
+  color: white;
+}
+
+.answer.wrong {
+  background: #95534a;
+  color: white;
+}
+
+.quiz-feedback {
+  font-size: 15px;
+  color: #987346;
+  margin-top: 9px;
+  min-height: 18px;
+}
+
+.range-box {
+  margin-top: 22px;
+  background: rgba(255,250,235,.58);
+  border: 1px solid #c8a66e;
+  padding: 20px;
+  text-align: center;
+}
+
+.range-box label {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
+
+.range-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 35px;
+  color: #8b6131;
+  margin-bottom: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #896338;
+  cursor: pointer;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #9c7a4e;
+  font-size: 14px;
+}
+
+/* RESULT */
+
+.result-icon {
+  font-size: 65px;
+  text-align: center;
+  margin: 15px;
+}
+
+.result-text {
+  text-align: center;
+  font-size: 25px;
+  line-height: 1.6;
+  color: #65472c;
+  max-width: 580px;
+  margin: 10px auto 25px;
+}
+
+.btn {
+  border: 1px solid #a98249;
+  background: linear-gradient(135deg, #8c673b, #654326);
+  color: #fff0d3;
+  padding: 12px 29px;
+  font-size: 17px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px #4c321d33;
+  transition: .25s;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #a78048, #78532e);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px #4c321d44;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: #704b2c;
+  box-shadow: none;
+}
+
+.btn.secondary:hover {
+  background: #ead8b5;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 22px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(920px, 100%);
+  margin-top: 25px;
+  gap: 15px;
+}
+
+.nav-btn {
+  color: #f0d8aa;
+  border: 1px solid #a98451;
+  background: transparent;
+  padding: 10px 22px;
+  font-size: 16px;
+  transition: .2s;
+}
+
+.nav-btn:hover {
+  background: #795632;
+}
+
+.nav-btn:disabled {
+  opacity: .25;
+  cursor: not-allowed;
+}
+
+.progress-area {
+  flex: 1;
+  max-width: 300px;
+  text-align: center;
+}
+
+.progress-track {
+  height: 3px;
+  background: #745237;
+  margin-bottom: 9px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #e4c38a;
+  width: 16.66%;
+  transition: width .4s;
+}
+
+.progress-label {
+  color: #e4cda6;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.footer {
+  color: #c3a579;
+  font-size: 13px;
+  margin-top: 18px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media(max-width: 650px) {
+  #app { padding: 20px 12px; }
+  .presentation { min-height: 620px; }
+  .slide { min-height: 620px; padding: 65px 28px 55px; }
+  .profile-grid { grid-template-columns: 1fr; gap: 10px; }
+  .info-card { padding: 15px; }
+  .answers { grid-template-columns: 1fr; }
+  .navigation { gap: 7px; }
+  .nav-btn { padding: 9px 12px; font-size: 14px; }
+  .progress-label { font-size: 11px; }
+  .description { font-size: 19px; }
+  .envelope { transform: scale(.9); }
+}
+</style>
+</head>
+
+<body>
+<div id="app">
+
+  <div class="top-label">✦ A LITTLE INTRODUCTION ✦</div>
+
+  <main class="presentation">
+
+    <!-- SLIDE 1 -->
+    <section class="slide active" data-slide="0">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">Welcome to my little world</div>
+      <h1 class="main-title">Xin chào!</h1>
+      <div class="script">Rất vui được gặp bạn</div>
+      <div class="gold-line"></div>
+      <div class="hero-seal">N</div>
+      <p class="description">
+        Chào mừng bạn đến với thế giới nhỏ của tôi.
+        Hãy cùng khám phá một chút về con người mang tên...
+      </p>
+      <h2 class="main-title" style="font-size:clamp(30px,5vw,48px)">
+        HUỲNH THIỆN NHÂN
+      </h2>
+      <p class="small-note">LỚP 10A06 · THPT PHÚ NHUẬN</p>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide" data-slide="1">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">Chapter I · About me</div>
+      <h1 class="main-title" style="font-size:clamp(35px,6vw,53px)">
+        Personal Profile
+      </h1>
+      <div class="script">Một vài điều về tôi</div>
+      <div class="gold-line"></div>
+
+      <div class="profile-grid">
+        <div class="info-card">
+          <div class="symbol">♔</div>
+          <div class="label">Họ và tên</div>
+          <div class="value">Huỳnh Thiện Nhân</div>
+        </div>
+
+        <div class="info-card">
+          <div class="symbol">♧</div>
+          <div class="label">Ngày sinh</div>
+          <div class="value">12 / 03 / 2011</div>
+        </div>
+
+        <div class="info-card">
+          <div class="symbol">✉</div>
+          <div class="label">Instagram</div>
+          <div class="value">thnn.hn</div>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thnn.hn/" target="_blank" rel="noopener">Visit Instagram ↗</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="symbol">❦</div>
+          <div class="label">Facebook</div>
+          <div class="value">HuynhTNhann</div>
+          <div class="social-links">
+            <a href="https://www.facebook.com/HuynhTNhann" target="_blank" rel="noopener">Visit Facebook ↗</a>
+          </div>
+        </div>
+      </div>
+      <p class="small-note">A PERSON WITH MANY LITTLE STORIES</p>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide" data-slide="2">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">Chapter II · My hobbies</div>
+      <h1 class="main-title" style="font-size:clamp(37px,6vw,58px)">
+        Music is my love
+      </h1>
+      <div class="script">Âm nhạc và tôi</div>
+      <div class="gold-line"></div>
+
+      <div class="music-stage">
+        <span class="sticker s1">♪</span>
+        <span class="sticker s2">✧</span>
+        <span class="sticker s3">♫</span>
+        <span class="sticker s4">♡</span>
+
+        <div class="music-icon">🎤</div>
+        <h2 style="font-size:29px;margin-top:12px;color:#664326">
+          Hát là sở thích của tôi!
+        </h2>
+        <p class="description" style="margin:12px auto 0">
+          Có những lúc không biết nói gì, âm nhạc lại có thể
+          thay mình kể rất nhiều câu chuyện.
+        </p>
+      </div>
+
+      <div class="hobby-tags">
+        <span>♫ Singing</span>
+        <span>♡ Music</span>
+        <span>✧ Enjoying life</span>
+        <span>♪ Good vibes</span>
+      </div>
+      <p class="small-note">LIFE SOUNDS BETTER WITH MUSIC</p>
+    </section>
+
+    <!-- SLIDE 4 -->
+    <section class="slide" data-slide="3">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">A little message for you</div>
+      <h1 class="main-title" style="font-size:clamp(35px,6vw,55px)">
+        A Letter
+      </h1>
+      <div class="script">Một bức thư nhỏ</div>
+      <div class="gold-line"></div>
+
+      <div class="letter-area">
+        <div class="envelope" id="envelope" onclick="openLetter()">
+          <div class="letter-paper">
+            <div>
+              <div style="font-size:25px;color:#a47a40">Dear friend,</div>
+              Cảm ơn bạn đã ghé thăm thế giới nhỏ này ♡
+            </div>
+          </div>
+          <div class="seal">N</div>
+        </div>
+
+        <p class="letter-instruction" id="letterHint">
+          ✧ Hãy bấm vào phong thư để mở nhé ✧
+        </p>
+
+        <div class="letter-message" id="letterMessage">
+          Cảm ơn bạn đã dành thời gian tìm hiểu về tôi.
+          Hy vọng bạn đã có thêm một chút hiểu biết về
+          Huỳnh Thiện Nhân. Nhưng hành trình vẫn chưa kết thúc đâu!
+          <div class="script" style="font-size:38px;margin-top:12px">
+            Shall we continue?
+          </div>
+        </div>
+      </div>
+
+      <div class="button-row hidden" id="letterButtons">
+        <button class="btn" onclick="goTo(4)">Tiếp tục ✧</button>
+        <button class="btn secondary" onclick="goTo(5)">Dừng lại</button>
+      </div>
+    </section>
+
+    <!-- SLIDE 5 -->
+    <section class="slide" data-slide="4">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">Chapter III · Let's play</div>
+      <h1 class="main-title" style="font-size:clamp(35px,6vw,54px)">
+        How well do you know me?
+      </h1>
+      <div class="script">Thử thách nho nhỏ</div>
+      <div class="gold-line"></div>
+
+      <p class="description" style="font-size:18px;margin:8px auto 17px">
+        Hãy thử trả lời những câu hỏi dưới đây để xem bạn đã hiểu tôi đến đâu nhé!
+      </p>
+
+      <div class="quiz-wrap">
+
+        <div class="quiz-question" data-question="0">
+          <div class="question-title">01. Số thứ tự trong lớp của tôi là bao nhiêu?</div>
+          <div class="answers">
+            <button class="answer" data-value="20">A. 20</button>
+            <button class="answer" data-value="28">B. 28</button>
+            <button class="answer" data-value="15">C. 15</button>
+            <button class="answer" data-value="32">D. 32</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-question="1">
+          <div class="question-title">02. Tôi đang ở trong câu lạc bộ nào?</div>
+          <div class="answers">
+            <button class="answer" data-value="PNY">A. PNY</button>
+            <button class="answer" data-value="CLB Âm nhạc">B. CLB Âm nhạc</button>
+            <button class="answer" data-value="CLB Tiếng Anh">C. CLB Tiếng Anh</button>
+            <button class="answer" data-value="CLB Thể thao">D. CLB Thể thao</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-question="2">
+          <div class="question-title">03. Môn nào có điểm trung bình cao nhất của tôi?</div>
+          <div class="answers">
+            <button class="answer" data-value="Toán">A. Toán</button>
+            <button class="answer" data-value="Văn">B. Ngữ văn</button>
+            <button class="answer" data-value="Anh">C. Tiếng Anh</button>
+            <button class="answer" data-value="Lý">D. Vật lý</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="range-box">
+          <label for="understanding">
+            04. Bạn nghĩ mình đã hiểu tôi đến mức nào?
+          </label>
+          <div class="range-value">
+            <span id="rangeNumber">5</span> / 10
+          </div>
+          <input type="range" id="understanding" min="1" max="10" value="5">
+          <div class="range-labels">
+            <span>Chưa hiểu lắm</span>
+            <span>Rất hiểu!</span>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn" onclick="submitQuiz()">Nộp câu trả lời ✧</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: RESULT -->
+    <section class="slide" data-slide="5">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="eyebrow">The final chapter</div>
+      <h1 class="main-title" id="resultTitle" style="font-size:clamp(35px,6vw,57px)">
+        Thank you!
+      </h1>
+      <div class="gold-line"></div>
+      <div class="result-icon" id="resultIcon">✧</div>
+      <div class="result-text" id="resultText">
+        Cảm ơn bạn đã dành thời gian tìm hiểu về Huỳnh Thiện Nhân.
+        Hy vọng chúng ta sẽ có thêm nhiều kỷ niệm đẹp!
+      </div>
+
+      <div class="button-row" id="successButtons">
+        <button class="btn" onclick="goTo(0)">Xem lại từ đầu ↺</button>
+      </div>
+
+      <div class="button-row hidden" id="retryButtons">
+        <button class="btn" onclick="goTo(0)">OK ✧</button>
+        <button class="btn secondary" onclick="busyButton()">Ai rảnh?</button>
+      </div>
+
+      <p class="small-note" id="endingNote">
+        WITH LOVE · HUỲNH THIỆN NHÂN
+      </p>
+    </section>
+
+  </main>
+
+  <nav class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Trước</button>
+
+    <div class="progress-area">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">01 / 06</div>
+    </div>
+
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Tiếp →</button>
+  </nav>
+
+  <div class="footer">✦ MADE WITH LOVE · 2026 ✦</div>
+</div>
+
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let currentSlide = 0;
+
+function updateSlide() {
+  slides.forEach((slide, index) => {
+    slide.classList.toggle("active", index === currentSlide);
+  });
+
+  document.getElementById("prevBtn").disabled = currentSlide === 0;
+
+  document.getElementById("nextBtn").classList.toggle(
+    "hidden",
+    currentSlide === 3 || currentSlide === 4 || currentSlide === 5
+  );
+
+  document.getElementById("progressFill").style.width =
+    ((currentSlide + 1) / slides.length * 100) + "%";
+
+  document.getElementById("progressLabel").textContent =
+    String(currentSlide + 1).padStart(2, "0") + " / 06";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function changeSlide(direction) {
+  const next = currentSlide + direction;
+  if (next < 0 || next >= slides.length) return;
+  currentSlide = next;
+  updateSlide();
+}
+
+function goTo(index) {
+  currentSlide = index;
+  updateSlide();
+}
+
+function openLetter() {
+  const envelope = document.getElementById("envelope");
+  const message = document.getElementById("letterMessage");
+  const hint = document.getElementById("letterHint");
+  const buttons = document.getElementById("letterButtons");
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+  hint.textContent = "✧ Một lời nhắn dành cho bạn ✧";
+
+  setTimeout(() => {
+    message.classList.add("show");
+    buttons.classList.remove("hidden");
+  }, 850);
+}
+
+// QUIZ
+
+const correctAnswers = ["28", "PNY", "Anh"];
+
+document.querySelectorAll(".quiz-question").forEach(question => {
+  const buttons = question.querySelectorAll(".answer");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      buttons.forEach(b => {
+        b.classList.remove("selected", "correct", "wrong");
+      });
+
+      button.classList.add("selected");
+      question.dataset.selected = button.dataset.value;
+    });
+  });
+});
+
+const range = document.getElementById("understanding");
+
+range.addEventListener("input", () => {
+  document.getElementById("rangeNumber").textContent = range.value;
+});
+
+function submitQuiz() {
+  let correctCount = 0;
+
+  document.querySelectorAll(".quiz-question").forEach((question, index) => {
+    const selected = question.dataset.selected;
+    const buttons = question.querySelectorAll(".answer");
+    const feedback = question.querySelector(".quiz-feedback");
+
+    buttons.forEach(button => {
+      button.classList.remove("correct", "wrong");
+
+      if (button.dataset.value === correctAnswers[index]) {
+        button.classList.add("correct");
+      }
+
+      if (button.dataset.value === selected &&
+          selected !== correctAnswers[index]) {
+        button.classList.add("wrong");
+      }
+    });
+
+    if (selected === correctAnswers[index]) {
+      correctCount++;
+      feedback.textContent = "✧ Chính xác!";
+    } else if (!selected) {
+      feedback.textContent = "Bạn chưa chọn câu trả lời.";
+    } else {
+      feedback.textContent = "Chưa đúng rồi! Đáp án đúng đã được đánh dấu.";
+    }
+  });
+
+  const understanding = Number(range.value);
+
+  goTo(5);
+
+  const title = document.getElementById("resultTitle");
+  const icon = document.getElementById("resultIcon");
+  const text = document.getElementById("resultText");
+  const success = document.getElementById("successButtons");
+  const retry = document.getElementById("retryButtons");
+  const note = document.getElementById("endingNote");
+
+  if (understanding >= 5) {
+    title.textContent = "Thank You!";
+    icon.textContent = "✧ ♡ ✧";
+    text.textContent =
+      "Cảm ơn bạn đã dành thời gian tìm hiểu về tôi! " +
+      "Bạn đã trả lời đúng " + correctCount + "/3 câu hỏi. " +
+      "Hy vọng bạn đã hiểu thêm nhiều điều về Huỳnh Thiện Nhân. " +
+      "Hẹn gặp lại bạn nhé!";
+    success.classList.remove("hidden");
+    retry.classList.add("hidden");
+    note.textContent = "THE END · WITH LOVE · HUỲNH THIỆN NHÂN";
+  } else {
+    title.textContent = "Let's Start Again!";
+    icon.textContent = "📜";
+    text.textContent =
+      "Có vẻ chúng ta vẫn chưa hiểu nhau lắm nhỉ? " +
+      "Vậy chúng ta bắt đầu lại nhé! Đừng ngại khám phá thêm về tôi nha. " +
+      "Bạn đã trả lời đúng " + correctCount + "/3 câu hỏi.";
+    success.classList.add("hidden");
+    retry.classList.remove("hidden");
+    note.textContent = "MAYBE NEXT TIME? ♡";
+  }
+}
+
+function busyButton() {
+  alert("Haha, nếu đã đến đây rồi thì cảm ơn bạn nhiều nha! ♡");
+}
+
+// Khởi tạo
+updateSlide();
+</script>
+
+</body>
+</html>
